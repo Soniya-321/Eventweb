@@ -4,7 +4,11 @@ import HeroSection from "../components/HeroSection";
 import RecommendedShows from "../components/RecommendedShows";
 import UpcomingEvents from "../components/UpcomingEvents";
 import { Box, Typography } from "@mui/material";
-
+const reco_url = process.env.REACT_APP_REC_URL;
+const upc_url = process.env.REACT_APP_UPC_URL;
+console.log(reco_url, "recos");
+console.log(upc_url, "upc");
+console.log(process.env, "envs");
 const Home = () => {
   const [recommended, setRecommended] = useState([]);
   const [upcoming, setUpcoming] = useState([]);
@@ -13,12 +17,8 @@ const Home = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const recoResponse = await fetch(
-          "https://gg-backend-assignment.azurewebsites.net/api/Events?code=FOX643kbHEAkyPbdd8nwNLkekHcL4z0hzWBGCd64Ur7mAzFuRCHeyQ==&type=reco"
-        );
-        const upcomingResponse = await fetch(
-          "https://gg-backend-assignment.azurewebsites.net/api/Events?code=FOX643kbHEAkyPbdd8nwNLkekHcL4z0hzWBGCd64Ur7mAzFuRCHeyQ==&page=1&type=upcoming"
-        );
+        const recoResponse = await fetch(reco_url);
+        const upcomingResponse = await fetch(upc_url);
 
         if (!recoResponse.ok || !upcomingResponse.ok) {
           throw new Error("Failed to fetch events");
